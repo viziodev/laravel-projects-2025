@@ -1,0 +1,35 @@
+@baseUrl = http://localhost:8000/api
+
+### Get all users
+GET {{baseUrl}}/users
+
+### Get a user by id
+GET {{baseUrl}}/users/1
+
+### Create a user
+POST {{baseUrl}}/users
+Content-Type: application/json
+Accept: application/json
+
+{
+    "first_name": "Shanna2",
+    "last_name": "Breitenberg",
+    "email": "velda3.schaden@example.com",
+    "phone_number": "+1.351.324.2002"
+}
+
+### Update a user
+PUT {{baseUrl}}/users/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "first_name": "Jean",
+    "last_name": "Dupont",
+    "phone_number": "+33.1.23.45.67.89"
+}
+
+### Delete a user
+DELETE {{baseUrl}}/users/1
+Accept: application/json
+
