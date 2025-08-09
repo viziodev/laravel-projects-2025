@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,11 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:50|unique:roles,name,' . $this->route('role'),
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'The role name is required.',
-            'name.string' => 'The role name must be a string.',
-            'name.max' => 'The role name may not be greater than 50 characters.',
-            'name.unique' => 'The role name must be unique.',
+            'last_name' => 'sometimes|required|string|max:255',
+            'first_name' => 'sometimes|required|string|max:255',
+            'email' => 'sometimes|required|email|max:255|unique:users,email,' . $this->route('user'),
+            'phone_number' => 'sometimes|required|string|max:20|unique:users,phone_number,' . $this->route('user'),
+            'password' => 'sometimes|required|string|min:8|confirmed',
         ];
     }
 }

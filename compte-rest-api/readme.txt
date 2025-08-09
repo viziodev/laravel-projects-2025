@@ -20,16 +20,17 @@
       3-Relations
       2-Route Ressources
 
-    #Chargement des Relation 
+     #Request Validation
+       1.Validation 
+       2.Custum Message 
+       3.Custum Rule
+     #Chargement des Relation 
       1-Eager avec with
       2-Lazy avec load
-
-
      #Soft Delete
 
     #Ressource et Collection
       1-Pagination
-
     #Authentification avec Passport
         1.Installation et configuration
         1.Creer le AuthController 
@@ -37,14 +38,19 @@
            b-Recuperation du user connect
            c-methode logout
            d-methode change password
-
     #MiddleWare 
       1-Auth
-      2-Crypt
+      2-Gestion des Exceptions 
+      3-Format Response 
+    #Guard et Ploicy    
     #Providers et Facade
     #Utilisation du Pattern Repository
         -Controllers
         -Services 
         -Repositories
+    #Events
+    #Commands 
+    #Jobs 
+
     
    

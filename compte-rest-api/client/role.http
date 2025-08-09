@@ -11,7 +11,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "name": "ADMIN"
+    "name": ""
 }
 
 ### Update a role

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,28 +37,19 @@ class UserController extends Controller
         ],Response::HTTP_OK);
     }
 
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-
-        $data = [
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'phone_number' => $request->input('phone_number'),
-            'password' => Hash::make("1234")
-        ];
-
-
-        $user = User::create($data);
-        
-        return response()->json([
+            $data = $request->only(['first_name', 'last_name', 'email', 'phone_number']) 
+                  + ['password' => Hash::make($request->input('password'))];
+            $user=User::create($data);
+            return response()->json([
             'status' => 'success',
             'data' => $user,
             'message' => 'Utilisateur créé avec succès'
-        ], Response::HTTP_CREATED);
+           ], Response::HTTP_CREATED);
     }
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $user = User::find($id);
         if (!$user) {

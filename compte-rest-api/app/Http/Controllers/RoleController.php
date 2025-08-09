@@ -12,30 +12,65 @@ class RoleController extends Controller
       {
         
          $roles = Role::all();
-         return response()->json($roles);
+         return response()->json([
+            "data"=>$roles,
+            'message' => 'Liste des roles récupérée avec succès',
+            'status' => 'success'
+        ]);
       }
 
     public function show($id)
     {
-        $role = Role::findOrFail($id);
-        return response()->json($role);
+        try {
+             $role = Role::findOrFail($id);
+              return response()->json($role);
+        } catch (\Exception $e) {
+            return response()->json([
+                 'message' => 'Role not found',
+                 'status' => 'error'
+                    
+            ], 404);
+        }   
+      
     }
     public function store(RoleRequest $request)
     {
         $role = Role::create($request->all());
-        return response()->json($role, 201);
+        return response()->json([
+            "data"=>$role,
+            'message' => 'Role enregistré avec succès',
+            'status' => 'success'
+        ], 201);
     }
     public function update(RoleRequest $request, $id)
     {
-        $role = Role::findOrFail($id);
-        $role->update($request->all());
-        return response()->json($role);
-        // Logic to retrieve and return roles  
+        try {
+             $role = Role::findOrFail($id);
+             $role->update($request->all());
+             return response()->json([
+              "data"=>$role,
+             'message' => 'Role modifie avec succès',
+             'status' => 'success'
+        ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Role not found'], 404);
+        }
     }
     public function destroy($id)
     {
-        $role = Role::findOrFail($id);
-        $role->delete();
-        return response()->json(null, 204);
+      try {
+              $role = Role::findOrFail($id);
+              $role->delete();
+              return response()->json([
+              "data"=>null,
+              'message' => 'Role supprimer  avec succès',
+              'status' => 'success'
+              ], 204);
+           } catch (\Exception $e) {
+              return response()->json([ 
+                'message' => 'Role not found',
+                'status' => 'error'], 404);
+          }  
+       
     }
 }
