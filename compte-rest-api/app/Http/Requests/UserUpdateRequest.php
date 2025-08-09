@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserUpdateRequest extends FormRequest
@@ -25,7 +26,14 @@ class UserUpdateRequest extends FormRequest
             'last_name' => 'sometimes|required|string|max:255',
             'first_name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|max:255|unique:users,email,' . $this->route('user'),
-            'phone_number' => 'sometimes|required|string|max:20|unique:users,phone_number,' . $this->route('user'),
+            'phone_number' => [
+                'sometimes',
+                'required',
+                'string',
+                'size:9',
+                'unique:users,phone_number,' . $this->route('user'),
+                new PhoneNumberRule(),
+            ],
             'password' => 'sometimes|required|string|min:8|confirmed',
         ];
     }

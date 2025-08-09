@@ -12,10 +12,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "first_name": "Shanna2",
+    "first_name": "Shanna223457",
     "last_name": "Breitenberg",
-    "email": "velda3.schaden@example.com",
-    "phone_number": "+1.351.324.2002"
+    "email": "velda323457.schaden@example.com",
+    "phone_number": "7771239"
 }
 
 ### Update a user

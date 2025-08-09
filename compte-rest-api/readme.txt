@@ -23,10 +23,11 @@
      #Request Validation
        1.Validation 
        2.Custum Message 
-       3.Custum Rule
+       3.Custum Rule.  php artisan make:rule PhoneNumberRule
      #Chargement des Relation 
-      1-Eager avec with
-      2-Lazy avec load
+      1-Definition au niveau des entity
+      2-Eager avec with
+      3-Lazy avec load
      #Soft Delete
 
     #Ressource et Collection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PhoneNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserCreateRequest extends FormRequest
@@ -25,7 +26,14 @@ class UserCreateRequest extends FormRequest
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
-            'phone_number' => 'required|string|max:20|unique:users,phone_number',
+            'phone_number' => [
+            'required',
+            'string',
+            'size:9',
+            new PhoneNumberRule(),
+            'unique:users,phone_number,' . $this->route('user'),
+        
+        ],
             'password' => 'sometimes|required|string|min:8|confirmed',
         ];
     }

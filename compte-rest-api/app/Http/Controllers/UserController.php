@@ -39,14 +39,23 @@ class UserController extends Controller
 
     public function store(UserCreateRequest $request)
     {
-            $data = $request->only(['first_name', 'last_name', 'email', 'phone_number']) 
-                  + ['password' => Hash::make($request->input('password'))];
-            $user=User::create($data);
-            return response()->json([
+
+        $data = [
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'phone_number' => $request->input('phone_number'),
+            'password' => Hash::make($request->input('password', '1234')),
+        ];
+
+
+        $user = User::create($data);
+        
+        return response()->json([
             'status' => 'success',
             'data' => $user,
             'message' => 'Utilisateur créé avec succès'
-           ], Response::HTTP_CREATED);
+        ], Response::HTTP_CREATED);
     }
 
     public function update(UserUpdateRequest $request, $id)
