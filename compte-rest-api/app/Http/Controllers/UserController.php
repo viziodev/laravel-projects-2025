@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,16 +12,38 @@ class UserController extends Controller
 {
     public function index()
     {
+         $archived=boolval(request()->input('archived', false) );
          $users = User::all();
+        if ($archived) {
+            $users = User::onlyTrashed()->get();
+        }
         if (request()->has('join')) {
             $join = request()->input('join');
             $users->load($join);
         }
+       
         return response()->json([
             'status' => 'success',
             'data' => $users,
             'message' => 'Utilisateurs récupérés avec succès'
         ],Response::HTTP_OK);
+    }
+
+     public function restore($id)
+     {
+        $user = User::onlyTrashed()->find($id);
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Utilisateur non trouvé'
+            ], Response::HTTP_NOT_FOUND);
+        }
+        $user->restore();
+        return response()->json([
+            'status' => 'success',
+            'data' => $user,
+            'message' => 'Utilisateur restauré avec succès'
+        ], Response::HTTP_OK);
     }
 
     public function show($id)
@@ -55,8 +76,6 @@ class UserController extends Controller
             'phone_number' => $request->input('phone_number'),
             'password' => Hash::make($request->input('password', '1234')),
         ];
-
-
         $user = User::create($data);
         
         return response()->json([

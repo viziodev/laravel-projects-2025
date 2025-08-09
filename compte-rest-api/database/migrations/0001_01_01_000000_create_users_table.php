@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('phone_number')->unique();
             $table->string('password');
             $table->enum('status', ['active', 'blocked'])->default('active');
-            
             $table->timestamps();
+            $table->softDeletes();
         });
 
        
