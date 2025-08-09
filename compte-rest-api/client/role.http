@@ -1,0 +1,27 @@
+@baseUrl = http://localhost:8000/api
+
+### Get all roles
+GET {{baseUrl}}/roles
+
+### Get a role by id
+GET {{baseUrl}}/roles/1
+### Create a role
+POST {{baseUrl}}/roles
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "ADMIN"
+}
+
+### Update a role
+PUT {{baseUrl}}/roles/1
+Content-Type: application/json  
+Accept: application/json
+
+{
+    "name": "CLIENT"
+}
+
+### Delete a role
+DELETE {{baseUrl}}/roles/1  

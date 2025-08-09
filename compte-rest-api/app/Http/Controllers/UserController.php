@@ -68,8 +68,11 @@ class UserController extends Controller
 
         // Validation des données
        
-        $data = $request->only(['first_name', 'last_name', 'email', 'phone_number']
-                              +['password'=>Hash::make($request->input('password'))]);
+        $data = $request->only(['first_name', 'last_name', 'email', 'phone_number']);
+        
+        if ($request->has('password')) {
+            $data['password'] = Hash::make($request->input('password'));
+        }
         $user->update($data);
         return response()->json([
             'status' => 'success',

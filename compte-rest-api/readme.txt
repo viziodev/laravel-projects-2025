@@ -15,7 +15,7 @@
       
 
     #Creation de la Ressource Role
-      1-Migration/Factories/Sedders/Controllers/Request
+      1-Migration/Factories/Sedders/Controllers/Request  ==> php artisan make:model Role  -mcfs  
       2-Cles etrangeres
       3-Relations
       2-Route Ressources
@@ -23,6 +23,9 @@
     #Chargement des Relation 
       1-Eager avec with
       2-Lazy avec load
+
+
+     #Soft Delete
 
     #Ressource et Collection
       1-Pagination
