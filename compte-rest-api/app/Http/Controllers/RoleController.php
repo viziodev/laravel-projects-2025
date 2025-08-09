@@ -19,10 +19,15 @@ class RoleController extends Controller
         ]);
       }
 
-    public function show($id)
+   
+    public function show(Request $request,$id)
     {
         try {
-             $role = Role::findOrFail($id);
+              $role = Role::findOrFail($id);
+              if($request->has('join') ) {
+                  $join= $request->input('join') ;
+                  $role->load($join);
+              }
               return response()->json($role);
         } catch (\Exception $e) {
             return response()->json([

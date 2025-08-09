@@ -13,7 +13,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+         $users = User::all();
+        if (request()->has('join')) {
+            $join = request()->input('join');
+            $users->load($join);
+        }
         return response()->json([
             'status' => 'success',
             'data' => $users,
@@ -30,9 +34,13 @@ class UserController extends Controller
                 'message' => 'Utilisateur non trouvé'
             ], 404);
         }
+        if (request()->has('join')) {
+            $join = request()->input('join');
+            $user->load($join);
+        }
         return response()->json([
             'status' => 'success',
-            'data' => $user,
+            'data' => $user->load('role'),
             'message' => 'Utilisateur récupéré avec succès'
         ],Response::HTTP_OK);
     }

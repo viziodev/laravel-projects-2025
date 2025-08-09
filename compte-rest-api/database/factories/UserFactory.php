@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -30,6 +31,7 @@ class UserFactory extends Factory
             'phone_number' => $this->faker->unique()->phoneNumber(),
             'password' => Hash::make('1234'),
             'status' => 'active',
+            'role_id' => Role::inRandomOrder()->first()?->id, // Assuming role_id is nullable and can be set later
         ];
     }
 

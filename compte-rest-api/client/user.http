@@ -1,10 +1,10 @@
 @baseUrl = http://localhost:8000/api
 
 ### Get all users
-GET {{baseUrl}}/users
+GET {{baseUrl}}/users?join=role
 
 ### Get a user by id
-GET {{baseUrl}}/users/1
+GET {{baseUrl}}/users/1?join=role
 
 ### Create a user
 POST {{baseUrl}}/users
@@ -15,7 +15,8 @@ Accept: application/json
     "first_name": "Shanna223457",
     "last_name": "Breitenberg",
     "email": "velda323457.schaden@example.com",
-    "phone_number": "7771239"
+    "phone_number": "7771239",
+    "role_id": 1
 }
 
 ### Update a user

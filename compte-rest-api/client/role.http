@@ -3,8 +3,19 @@
 ### Get all roles
 GET {{baseUrl}}/roles
 
+
+
+
 ### Get a role by id
 GET {{baseUrl}}/roles/1
+
+### Get a role by id with join
+GET {{baseUrl}}/roles/1?join=users
+
+
+
+
+Accept: application/json
 ### Create a role
 POST {{baseUrl}}/roles
 Content-Type: application/json
