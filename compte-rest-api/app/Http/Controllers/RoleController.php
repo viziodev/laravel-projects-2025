@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -19,21 +20,14 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         return response()->json($role);
     }
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:roles,name',
-        ]);
         $role = Role::create($request->all());
         return response()->json($role, 201);
     }
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-       
         $role = Role::findOrFail($id);
-         $request->validate([
-            'name' => 'required|string|max:255|unique:roles,name,' . $id,
-        ]);
         $role->update($request->all());
         return response()->json($role);
         // Logic to retrieve and return roles  
